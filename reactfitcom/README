@@ -1,0 +1,85 @@
+// import { useEffect, useState } from "react";
+// import { Link, useParams } from "react-router-dom";
+// import axios from "axios";
+
+// function DetailsBarang() {
+//     const baseURL = "http://localhost:8000/storage";
+//     const { slug } = useParams();
+//     const [type, setType] = useState<string | null>(null);
+//     const [data, setData] = useState<any | null>(null);
+//     const [loading, setLoading] = useState(true);
+//     const [error, setError] = useState<string | null>(null);
+
+//     useEffect(() => {
+//         const queryParams = new URLSearchParams(window.location.search);
+//         const typeParam = queryParams.get("type");
+//         setType(typeParam); // Set type dari query string
+
+//         const fetchData = async () => {
+//             setLoading(true);
+//             try {
+//                 let response;
+
+//                 // Set headers untuk permintaan API
+//                 const headers = {
+//                     "Accept": "application/json",
+//                     "X-API-KEY": "shqiuhwwqdeqwndiu23", // Ganti dengan token API yang valid
+//                 };
+
+//                 if (type === "barang") {
+//                     response = await axios.get(`http://127.0.0.1:8000/api/barangs/${slug}`, { headers });
+//                 } else if (type === "promo") {
+//                     response = await axios.get(`http://127.0.0.1:8000/api/barang-promos/${slug}`, { headers });
+//                 } else if (type === "terlaris") {
+//                     response = await axios.get(`http://127.0.0.1:8000/api/barang-terlaris/${slug}`, { headers });
+//                 } else {
+//                     throw new Error("Tipe data tidak valid");
+//                 }
+
+//                 setData(response.data.data);
+//             } catch (error) {
+//                 // Menangani kesalahan dengan lebih baik
+//                 const errorMessage = error.response ? error.response.data.message : error.message;
+//                 console.error("Error fetching data:", errorMessage); // Log error detail
+//                 setError("Gagal mengambil data dari server.");
+//             } finally {
+//                 setLoading(false);
+//             }
+//         };
+
+//         if (type) {
+//             fetchData();
+//         }
+//     }, [slug, type]);
+
+//     // Render loading state
+//     if (loading) {
+//         return <div>Loading...</div>;
+//     }
+
+//     // Render error state
+//     if (error) {
+//         return <div>{error}</div>;
+//     }
+
+//     console.log(data);
+
+
+//     return (
+//         <div>
+//             <h1>Detail Barang</h1>
+//             {data && (
+//                 <div>
+//                     <h2>{data.nama_barang}</h2>
+//                     <p>Harga: {data.harga}</p>
+//                     <p>Stok: {data.stok}</p>
+//                     <img src={`${baseURL}/${data.photo}`} alt={data.nama_barang} />
+//                     {/* Render detail barang lainnya sesuai kebutuhan */}
+//                 </div>
+//             )}
+//         </div>
+//     );
+
+// }
+
+// export default DetailsBarang;

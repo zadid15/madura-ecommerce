@@ -1,13 +1,13 @@
 import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import axios from "axios";
-import { VariantPhoto } from "../types/type";
+import { Barang, BarangPromo, BarangTerlaris, VariantPhoto } from "../types/type";
 
 function DetailsBarang() {
     const baseURL = "http://localhost:8000/storage";
     const { slug } = useParams();
     const [type, setType] = useState<string | null>(null);
-    const [data, setData] = useState<any | null>(null);
+    const [data, setData] = useState<Barang | BarangPromo | BarangTerlaris | null>(null);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState<string | null>(null);
 
@@ -90,17 +90,17 @@ function DetailsBarang() {
                 <div className="w-full w-col-left mb-4">
                     <div className="bg-white rounded-4 shadow-sm p-8 custom-border-color-dark shadow-sm">
                         <h2 className="text-2xl pt-4 text-center mb-1 mb-md-2">
-                            {data.nama_barang}
+                            {data?.nama_barang}
                         </h2>
                         <div className="d-flex justify-content-center mb-5">
                             <img
                                 className="img-product w-50"
-                                src={`${baseURL}/${data.photo}`} />
+                                src={`${baseURL}/${data?.photo}`} />
                         </div>
                     </div>
 
                     <div className="d-flex justify-content-center gap-3 mt-3">
-                        {data.detailBarang[0].variantPhotos.map((photo: VariantPhoto) => (
+                        {data?.detailBarang[0].variantPhotos.map((photo: VariantPhoto) => (
                             <img
                                 key={photo.id}
                                 src={`${baseURL}/${photo.variant_photo}`}
@@ -116,23 +116,23 @@ function DetailsBarang() {
                     <div className="bg-white shadow-sm p-4 rounded-4 custom-border-color-dark shadow-sm">
                         <p className="mb-2">
                             <span className="fw-semibold text-base text-lg text-xl">Harga:</span>{" "}
-                            Rp {data.harga.toLocaleString("id-ID")}
+                            Rp {data?.harga.toLocaleString("id-ID")}
                         </p>
                         <p className="mb-2">
                             <span className="fw-semibold text-base text-lg text-xl">Stok Tersisa:</span>{" "}
-                            {data.stok}
+                            {data?.stok}
                         </p>
                         <p className="mb-2 text-base text-lg text-xl">
                             <span className="fw-semibold">Detail Barang:</span>{" "}
-                            {data.detailBarang[0].detail_barang}
+                            {data?.detailBarang[0].detail_barang}
                         </p>
                         <p className="mb-2 text-base text-lg text-xl">
                             <span className="fw-semibold">Jumlah Terjual:</span>{" "}
-                            {data.detailBarang[0].jumlah_terjual}
+                            {data?.detailBarang[0].jumlah_terjual}
                         </p>
                         <p className="mb-2 text-base text-lg text-xl">
                             <span className="fw-semibold">Rating:</span>{" "}
-                            {data.detailBarang[0].rating}
+                            {data?.detailBarang[0].rating}
                         </p>
                     </div>
                 </div>
